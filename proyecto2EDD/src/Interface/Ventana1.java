@@ -5,11 +5,21 @@
  */
 package Interface;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rolando
  */
 public class Ventana1 extends javax.swing.JFrame {
+    
+    public static String text = "";
+    
 
     /**
      * Creates new form Ventana1
@@ -50,6 +60,12 @@ public class Ventana1 extends javax.swing.JFrame {
         Add.setFont(new java.awt.Font("Bahnschrift", 1, 20)); // NOI18N
         Add.setText("Agrega tu resumen");
         jPanel1.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 11, 180, 20));
+
+        jFileChooser2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFileChooser2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jFileChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 11, -1, -1));
 
         Analyze.setBackground(new java.awt.Color(255, 255, 255));
@@ -137,7 +153,40 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        
     }//GEN-LAST:event_ExitActionPerformed
+
+    private void jFileChooser2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser2ActionPerformed
+        // TODO add your handling code here:
+        String aux = "";
+        
+        try {
+//            Llamamos al método que permite cargar la ventana
+      
+//            Abrimos el archivo seleccionado
+            File open = jFileChooser2.getSelectedFile();
+            
+//            Recorremos el archivo, leemos y lo plasmamos en un area de texto
+            if (open != null) {
+                
+                FileReader archivos = new FileReader(open);
+                BufferedReader read = new BufferedReader(archivos);
+                while ((aux = read.readLine()) != null) {
+                    
+                    text += aux + "\n";   
+                }
+                read.close(); 
+                
+                System.out.println(text);
+            }
+        } catch (IOException e) {
+            
+            JOptionPane.showMessageDialog(null, e + "" +
+           "\nNo se ha encontrado el archivo",
+                 "ADVERTENCIA!!!",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jFileChooser2ActionPerformed
 
     /**
      * @param args the command line arguments
