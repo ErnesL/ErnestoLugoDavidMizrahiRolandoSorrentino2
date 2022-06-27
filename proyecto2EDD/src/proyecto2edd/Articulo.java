@@ -39,7 +39,7 @@ public class Articulo<T> {
 
         String autoresconcatenados = this.autores.concatenarValores(this.autores);
         String palabrasconcatenadas = this.palabrasClave.concatenarValores(this.palabrasClave);
-        String aux = "Titulo: " + this.titulo + "\n" + "\n" + "Autores: " + autoresconcatenados + "\n" + "\n" + "Resumen: " + this.cuerpo + "\n" + "\n" + "Palabras Claves: " + palabrasconcatenadas;
+        String aux = "Titulo: " + this.titulo + "\n" + "\n" + "Autores: " + autoresconcatenados + "\n" + "\n" + "Resumen: " + this.cuerpo + "\n" + "\n" + "Palabras Claves: " + palabrasconcatenadas + "\n";
 
         //Interfaz
         JFrame frame = new JFrame(this.titulo);
@@ -58,6 +58,9 @@ public class Articulo<T> {
 
         frame.add(scroll);
         frame.setVisible(true);
+
+//        JOptionPane.showMessageDialog(null, autoresconcatenados);
+//        JOptionPane.showMessageDialog(null, palabrasconcatenadas);
     }
 
     public String getTitulo() {

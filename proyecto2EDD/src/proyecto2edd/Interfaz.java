@@ -102,7 +102,7 @@ public class Interfaz extends javax.swing.JFrame {
                     }
 
                 }
-
+                
                 lecturaArchivo(txt, articulo);
 
 //                if (!"".equals(txt) && !txt.isEmpty()) {

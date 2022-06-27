@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import static proyecto2edd.Metodos.hashFunc;
 
 /**
@@ -74,7 +75,8 @@ public class ManejoArchivo {
 
                     articulo.setCuerpo(arrayCampos[j + 1]);
 //                            System.out.println(articulo.getCuerpo());
-                } else if (arrayCampos[j].contains("Palabras clave")) {
+                } else if (arrayCampos[j].contains("Palabras")) {
+
                     break;
                 }
             }
@@ -85,10 +87,13 @@ public class ManejoArchivo {
         String keyWords = arrayCampos[j].substring(17).replace(", ", "/");
 
         String[] keyWordsArr = keyWords.split("/");
+
         for (int k = 0; k < keyWordsArr.length; k++) {
+
             palabrasClave.agregarElemento(keyWordsArr[k]);
 
         }
+        articulo.setPalabrasClave(palabrasClave);
 
         articulo.mostrarInfo();
 

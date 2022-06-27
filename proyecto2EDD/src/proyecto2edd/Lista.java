@@ -364,6 +364,8 @@ public class Lista<T> {
 
             aux = aux.getpNext();
         }
+        System.out.println(concatenado);
+
         return concatenado;
     }
 
