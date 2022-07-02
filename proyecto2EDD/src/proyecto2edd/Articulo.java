@@ -82,6 +82,8 @@ public class Articulo<T> {
             JOptionPane.showMessageDialog(null, "Guardado exitoso");
         } catch (HeadlessException | FileNotFoundException err) {
             JOptionPane.showMessageDialog(null, err);
+
+            //comentario
         }
     }
 
