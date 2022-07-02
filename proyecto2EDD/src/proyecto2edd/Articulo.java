@@ -83,7 +83,6 @@ public class Articulo<T> {
         } catch (HeadlessException | FileNotFoundException err) {
             JOptionPane.showMessageDialog(null, err);
         }
-
     }
 
     public String getTitulo() {
