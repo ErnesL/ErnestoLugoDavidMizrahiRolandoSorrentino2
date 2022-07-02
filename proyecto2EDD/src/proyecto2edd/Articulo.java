@@ -73,7 +73,7 @@ public class Articulo<T> {
         //Funcion para escribir el articulo creado en el archivo "basededatos.txt"
         String autoresconcatenados = this.autores.concatenarValores(this.autores);
         String palabrasconcatenadas = this.palabrasClave.concatenarValores(this.palabrasClave);
-        String aux = this.titulo + "/" + autoresconcatenados + "//" + this.cuerpo + "//" + palabrasconcatenadas + "\n";
+        String aux = this.titulo + "//" + autoresconcatenados + "//" + this.cuerpo + "//" + palabrasconcatenadas + "\n";
         try {
 
             PrintWriter pw = new PrintWriter(new FileOutputStream(new File("test\\basededatos.txt"), true /* append = true */));
@@ -83,7 +83,6 @@ public class Articulo<T> {
         } catch (HeadlessException | FileNotFoundException err) {
             JOptionPane.showMessageDialog(null, err);
 
-            //comentario
         }
     }
 

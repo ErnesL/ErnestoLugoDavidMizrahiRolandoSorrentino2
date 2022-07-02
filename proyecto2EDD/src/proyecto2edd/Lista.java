@@ -356,6 +356,22 @@ public class Lista<T> {
         }
 
     }
+//
+//    public void imprimirValoresArticulo() {
+//        if (!esVacio()) {
+//            Nodo aux = pFirst;
+//
+//            for (int i = 0; i < size; i++) {
+//
+//                System.out.print(aux.getInfo() + " ==> ");
+//
+//                aux = aux.getpNext();
+//            }
+//        } else {
+//            System.out.print("La lista esta vacia");
+//        }
+//
+//    }
 
     public String concatenarValores(Object lista) {
         Nodo aux = pFirst;
