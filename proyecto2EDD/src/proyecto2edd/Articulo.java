@@ -7,6 +7,11 @@ package proyecto2edd;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.HeadlessException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -61,6 +66,24 @@ public class Articulo<T> {
 
 //        JOptionPane.showMessageDialog(null, autoresconcatenados);
 //        JOptionPane.showMessageDialog(null, palabrasconcatenadas);
+    }
+
+    public void agregarABaseDeDatos() {
+
+        //Funcion para escribir el articulo creado en el archivo "basededatos.txt"
+        String autoresconcatenados = this.autores.concatenarValores(this.autores);
+        String palabrasconcatenadas = this.palabrasClave.concatenarValores(this.palabrasClave);
+        String aux = this.titulo + "/" + autoresconcatenados + "//" + this.cuerpo + "//" + palabrasconcatenadas + "\n";
+        try {
+
+            PrintWriter pw = new PrintWriter(new FileOutputStream(new File("test\\basededatos.txt"), true /* append = true */));
+            pw.append(aux);
+            pw.close();
+            JOptionPane.showMessageDialog(null, "Guardado exitoso");
+        } catch (HeadlessException | FileNotFoundException err) {
+            JOptionPane.showMessageDialog(null, err);
+        }
+
     }
 
     public String getTitulo() {

@@ -95,6 +95,8 @@ public class ManejoArchivo {
         }
         articulo.setPalabrasClave(palabrasClave);
 
+        articulo.agregarABaseDeDatos();
+
         articulo.mostrarInfo();
 
     }

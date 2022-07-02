@@ -1,5 +1,6 @@
 package proyecto2edd;
 
+import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 
 /*
@@ -359,14 +360,17 @@ public class Lista<T> {
     public String concatenarValores(Object lista) {
         Nodo aux = pFirst;
         String concatenado = "";
+        String concatenadobien = "";
+        StringJoiner sj = new StringJoiner(",");
         for (int i = 0; i < size; i++) {
-            concatenado += aux.getInfo() + ", ";
+            concatenado += aux.getInfo() + ",";
 
             aux = aux.getpNext();
         }
-        System.out.println(concatenado);
+        concatenadobien = concatenado.substring(0, concatenado.length() - 1);
+        System.out.println(concatenadobien);
 
-        return concatenado;
+        return concatenadobien;
     }
 
     /**

@@ -7,6 +7,7 @@ package proyecto2edd;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,7 +23,7 @@ import static proyecto2edd.ManejoArchivo.lecturaArchivo;
  */
 public class Interfaz extends javax.swing.JFrame {
 
-    public static Lista listaAutores = new Lista();
+    public static Lista listaArticulos = new Lista();
     public static Articulo articulo = new Articulo();
 
     /**
@@ -72,6 +73,39 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+//    private void leerBDD() {
+//        String articulos = "";
+//        String path = "test\\basededatos.txt";
+//        String line = "";
+//        File file = new File(path);
+//
+//        try {
+//            if (!file.exists()) {
+//
+//                file.createNewFile();
+//            } else {
+//                FileReader fr = new FileReader(file);
+//                BufferedReader br = new BufferedReader(fr);
+//
+//                while ((line = br.readLine()) != null) {
+//                    if (!line.isEmpty()) {
+//                        articulos += line + "\n";
+//                    }
+//
+//                    if (!"".equals(articulos)) {
+//                        //Si el super string no esta vacio
+//
+//                    }
+//                }
+//
+//            }
+//            br.close();
+//
+//        } catch () {
+//        }
+//    }
+
+
     private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         jfc.setDialogTitle("Selecciona un archivo de texto (.txt)");
@@ -102,7 +136,7 @@ public class Interfaz extends javax.swing.JFrame {
                     }
 
                 }
-                
+
                 lecturaArchivo(txt, articulo);
 
 //                if (!"".equals(txt) && !txt.isEmpty()) {
