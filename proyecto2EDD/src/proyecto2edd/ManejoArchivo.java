@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import static proyecto2edd.Metodos.hashFunc;
+import  proyecto2edd.HashTable. *;
 
 /**
  *
@@ -74,7 +74,7 @@ public class ManejoArchivo {
 
                     articulo.setCuerpo(arrayCampos[j + 1]);
 //                            System.out.println(articulo.getCuerpo());
-                } else if (arrayCampos[j].contains("Palabras clave")) {
+                } else if (arrayCampos[j].contains("Palabras ")) {
                     break;
                 }
             }
@@ -90,6 +90,7 @@ public class ManejoArchivo {
 
         }
 
+        articulo.setPalabrasClave(palabrasClave);
         articulo.mostrarInfo();
 
     }

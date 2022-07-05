@@ -13,7 +13,7 @@ import proyecto2edd.Articulo.*;
  *
  * @author davidmizrahi
  */
-public class Main {
+public class Main1 {
 
     /**
      * @param args the command line arguments
@@ -64,7 +64,44 @@ public class Main {
                 + "El estilo arquitectónico conocido como Transferencia de Estado Representacional (REST según sus siglas en inglés) ha modelado y estandarizado  la  comunicación cliente-servidor a través del protocolo de transferencia de hipertexto (HTTP). Según Roy Fielding, creador de REST,  este estilo consiste en un conjunto de restricciones arquitectónicas que enfatizan la escalabilidad de las interacciones entre los componentes, así co mo la generalidad las interfaces utilizadas, el despliegue independiente de dichos componentes, la aplicación de componentes intermediarios para la reducción de la latencia, la preponderancia de la seguridad y la encapsulación de los sistemas Legacy. Como consecuencia, REST se ha convertido en el estilo más aplicado en la comunicación con una Interfaz de Programación de Aplicaciones (API). Por otra parte, GraphQL es una tecnología basada en un lenguaje de consultas de datos para API’s que se ha constituido en una alternativa al estilo REST. En este trabajo de investigación, se realizó una comparación de REST y GraphQL como mecanismos arquitectónicos desde una perspectiva de calidad, específicamente  centrada en la  Eficiencia de Desempeño, en el marco del estándar ISO/IEC 9126 e ISO/IEC 25000. Las subcaracterísticas de Eficiencia de Desempeño evaluadas fueron: Comportamiento Temporal, Utilización de Recursos y Capacidad. Para cada una de dichas subcaracterísticas, se aplicaron métricas, a saber: para el Comportamiento Temporal se aplicaron las métricas Tiempo de Respuesta y Rendimiento; para la Utilización de Recursos, se aplicaron las métricas: Utilización de la Memoria, Utilización de Caché, Overfetching y Underfetching; y para Capacidad, se aplicaron las métricas Capacidad y Velocidad Bajo Estrés. Para el desarrollo de este trabajo se seleccionó un caso de estudio que permitiera evidenciar las características de los dos mecanismos. Asimismo, para la obtención de datos cuantitativos que permitiesen establecer comparaciones, se diseñaron dos API’s que con base en el caso de estudio escogido, respondieran fielmente a las restricciones que caracterizan a los dos mecanismos arquitectónicos. Los resultados obtenidos, una vez ejecutados los casos de prueba, permiten inferir que REST posee una mayor rapidez de respuesta que GraphQL. Debido a la naturaleza dinámica de las peticiones que pueden realizarse en las que se puede especificar con mayor granularidad la información requerida a través de consultas anidadas, GraphQL parece ser más eficiente en lo relativo al underfetching y al overfetching. En general, GraphQL debería utilizarse cuando se requiere menor utilización de la memoria, cuando los recursos que la API maneja están estrechamente relacionados y cuando no sea necesario utilizar la totalidad de la información obtenida. Por otra parte, REST debería utilizarse en caso de necesitarse mayor velocidad de respuesta y cuando se requiera utilizar la totalidad de la información de los recursos manejados. \n"
                 + " \n"
                 + "Palabras Claves: REST, GraphQL, cliente-servidor, mecanismo arquitectónico, calidad de software.";
+        
+
+                Articulo articulo = new Articulo();
+                
+                ManejoArchivo.lecturaArchivo(resumen1, articulo);
+
+                HashTable table = new HashTable(37);
+                
+                table.put(articulo, articulo);
+                System.out.println(table.getSize());
+//                System.out.println(table.getBucketArray()[7]);
+                for (int i = 0; i < table.getCapacity(); i++) {
+                    System.out.println(table.getBucketArray()[i]);
+//        }
+
+
 
     }
+                Articulo obj = (Articulo)table.getBucketArray()[17].getValue();
+                
+//                System.out.println(obj instanceof Articulo);
+                Articulo inv = new Articulo();
 
+                ManejoArchivo.lecturaArchivo(resumen1, inv);
+
+                HashTable autores = new HashTable(1223);
+                Nodo aux = inv.getAutores().getpFirst();
+                    while(aux != null){
+                    autores.put_listas(aux, inv);
+                    aux = aux.getpNext();
+
+                    }
+                Articulo art = (Articulo)autores.getBucketArray()[87].getValue();
+                System.out.println(art.getTitulo());
+//                Articulo obj3 = (Articulo)obj2.getpFirst().getInfo();
+//                System.out.println(obj2.getpFirst().getInfo());
+
+
+
+    }
 }
