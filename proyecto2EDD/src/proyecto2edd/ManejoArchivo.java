@@ -4,18 +4,11 @@
  */
 package proyecto2edd;
 
-import java.awt.HeadlessException;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
-import static proyecto2edd.Interfaz.articulo;
-import static proyecto2edd.Interfaz.listaArticulos;
-import static proyecto2edd.Metodos.hashFunc;
+import  proyecto2edd.HashTable. *;
 
 /**
  *
@@ -40,7 +33,7 @@ public class ManejoArchivo {
         }
     }
 
-    public static void lecturaArchivo(String resumen, Articulo articulo, Lista listaArticulos) {
+    public static void lecturaArchivo(String resumen, Articulo articulo) {
 
         Scanner scanner = new Scanner(resumen);
         int i = 0;
@@ -49,136 +42,57 @@ public class ManejoArchivo {
         Lista<String> autores = new Lista<>();
         Lista<String> palabrasClave = new Lista<>();
         String concatenado = "";
-
         while (scanner.hasNext()) {
+//                 i++;
+//                 arrayCampos = new String[i+1];
             linea = scanner.nextLine();
+
             arrayCampos[i] = linea;
             i++;
+
         }
 
-//Verificacion de si existe el articulo en la base de datos.
-        String titulo = arrayCampos[0];
-        System.out.println(titulo);
-        boolean encontrado = false;
+        articulo.setTitulo(arrayCampos[0]);
+//                for (int j = 0; j < arrayCampos.length; j++) {
+//                    System.out.println(arrayCampos[j]);
+//            
+//        }
 
-        if (!listaArticulos.esVacio()) {
+        int j = 0;
+        while (j < arrayCampos.length) {
 
-            Nodo aux = listaArticulos.getpFirst();
+            if (arrayCampos[j] != null) {
 
-            //TODO regresar aca a tratar de optimizar la funcion Buscar() de la clase Lista
-            for (int k = 0; k < listaArticulos.Size(); k++) {
+                if (arrayCampos[j].contains("Autores")) {
 
-                Articulo aux1 = (Articulo) aux.getInfo();
+                    while (!arrayCampos[j + 1].contains("Resumen")) {
 
-                if (titulo.toLowerCase().equals(aux1.getTitulo().toLowerCase())) {
-
-                    encontrado = true;
-
-                } else {
-                    aux = aux.getpNext();
-
-                }
-
-            }
-
-            //Afuera del for
-            if (encontrado == true) {
-                JOptionPane.showMessageDialog(null, "Error. El archivo que se intenta cargar ya se encuentra en la base de datos.");
-
-            } else {
-
-                articulo.setTitulo(titulo);
-                int j = 0;
-                while (j < arrayCampos.length) {
-
-                    if (arrayCampos[j] != null) {
-
-                        if (arrayCampos[j].contains("Autores")) {
-
-                            while (!arrayCampos[j + 1].contains("Resumen")) {
-
-                                autores.agregarElemento(arrayCampos[j + 1]);
-                                j++;
-                            }
-                        } else if (arrayCampos[j].contains("Resumen")) {
-
-                            articulo.setCuerpo(arrayCampos[j + 1]);
-
-                        } else if (arrayCampos[j].contains("Palabras")) {
-
-                            break;
-                        }
+                        autores.agregarElemento(arrayCampos[j + 1]);
+                        j++;
                     }
-                    j++;
+                } else if (arrayCampos[j].contains("Resumen")) {
+
+                    articulo.setCuerpo(arrayCampos[j + 1]);
+//                            System.out.println(articulo.getCuerpo());
+                } else if (arrayCampos[j].contains("Palabras ")) {
+                    break;
                 }
-
-                articulo.setAutores(autores);
-                String keyWords = arrayCampos[j].substring(17).replace(", ", "/");
-
-                String[] keyWordsArr = keyWords.split("/");
-
-                for (int k = 0;
-                        k < keyWordsArr.length;
-                        k++) {
-
-                    palabrasClave.agregarElemento(keyWordsArr[k]);
-
-                }
-
-                articulo.setPalabrasClave(palabrasClave);
-
-                articulo.agregarABaseDeDatos();
-
-                articulo.mostrarInfo();
-
             }
-        } else {
-//proceso de agregar articulo
-
-            articulo.setTitulo(titulo);
-            int j = 0;
-            while (j < arrayCampos.length) {
-
-                if (arrayCampos[j] != null) {
-
-                    if (arrayCampos[j].contains("Autores")) {
-
-                        while (!arrayCampos[j + 1].contains("Resumen")) {
-
-                            autores.agregarElemento(arrayCampos[j + 1]);
-                            j++;
-                        }
-                    } else if (arrayCampos[j].contains("Resumen")) {
-
-                        articulo.setCuerpo(arrayCampos[j + 1]);
-
-                    } else if (arrayCampos[j].contains("Palabras")) {
-
-                        break;
-                    }
-                }
-                j++;
-            }
-
-            articulo.setAutores(autores);
-            String keyWords = arrayCampos[j].substring(17).replace(", ", "/");
-
-            String[] keyWordsArr = keyWords.split("/");
-
-            for (int k = 0;
-                    k < keyWordsArr.length;
-                    k++) {
-
-                palabrasClave.agregarElemento(keyWordsArr[k]);
-
-            }
-
-            articulo.setPalabrasClave(palabrasClave);
-
-            articulo.agregarABaseDeDatos();
-
-            articulo.mostrarInfo();
+            j++;
         }
+
+        articulo.setAutores(autores);
+        String keyWords = arrayCampos[j].substring(17).replace(", ", "/");
+
+        String[] keyWordsArr = keyWords.split("/");
+        for (int k = 0; k < keyWordsArr.length; k++) {
+            palabrasClave.agregarElemento(keyWordsArr[k]);
+
+        }
+
+        articulo.setPalabrasClave(palabrasClave);
+        articulo.mostrarInfo();
+
     }
 
     public static void eliminarArchivo() {
@@ -189,72 +103,5 @@ public class ManejoArchivo {
             System.out.println("Unexpected error found in deletion of the file.");
         }
 
-    }
-
-    public static void leerBDD() {
-        String articulos = "";
-        String path = "test\\basededatos.txt";
-        String line;
-        File file = new File(path);
-
-        try {
-            if (!file.exists()) {
-                JOptionPane.showMessageDialog(null, "El archivo 'basededatos.txt' fue borrado. Se esta creando de nuevo ...");
-                file.createNewFile();
-            } else {
-                FileReader fr = new FileReader(file);
-                BufferedReader br = new BufferedReader(fr);
-
-                while ((line = br.readLine()) != null) {
-                    if (!line.isEmpty()) {
-                        articulos += line + "\n";
-                    }
-                }
-                if (!"".equals(articulos)) {
-                    //Si el super string no esta vacio
-                    String[] articulos_split = articulos.split("\n");
-//                   
-                    for (int i = 0; i < articulos_split.length; i++) {
-
-                        Lista listaAutores = new Lista();
-                        Lista listaPalabras = new Lista();
-                        Articulo articulo = new Articulo();
-
-                        //Separa la informacion por "//". titulo -> 0; autores -> 1; cuerpo -> 2; palabrasclaves -> 3.
-                        String[] articulo_objeto = articulos_split[i].split("//");
-
-                        //Separa la informacion de los autores refiriendose al indice 1 y separando por ","
-                        String[] articulo_objeto_autores = articulo_objeto[1].split(",");
-
-                        //Separa la informacion de las palabras claves refiriendose al indice 3 y separando por ","
-                        String[] articulo_objeto_palabrasClave = articulo_objeto[3].split(",");
-
-                        //Agrega la informacion del array articulo_objeto_autores en una listaAutores.
-                        for (int j = 0; j < articulo_objeto_autores.length; j++) {
-                            listaAutores.agregarElemento(articulo_objeto_autores[j]);
-                        }
-
-                        //Agrega la informacion del array articulo_objeto_palabrasclave en una listaPalabras
-                        for (int k = 0; k < articulo_objeto_palabrasClave.length; k++) {
-                            listaPalabras.agregarElemento(articulo_objeto_palabrasClave[k]);
-                        }
-
-                        //Setters
-                        articulo.setTitulo(articulo_objeto[0]);
-                        articulo.setAutores(listaAutores);
-                        articulo.setCuerpo(articulo_objeto[2]);
-                        articulo.setPalabrasClave(listaPalabras);
-
-                        //Agregar a listaArticulos
-                        listaArticulos.agregarElemento(articulo);
-                    }
-                }
-                br.close();
-
-            }
-
-        } catch (HeadlessException | IOException ex) {
-            JOptionPane.showMessageDialog(null, "Error al tratar de leer la base de datos clientes.");
-        }
     }
 }
