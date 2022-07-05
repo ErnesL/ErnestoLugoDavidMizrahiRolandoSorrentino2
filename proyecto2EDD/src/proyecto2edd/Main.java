@@ -8,6 +8,7 @@ import java.io.File;
 import static proyecto2edd.ManejoArchivo.crearArchivo;
 import static proyecto2edd.ManejoArchivo.lecturaArchivo;
 import proyecto2edd.Articulo.*;
+import static proyecto2edd.ManejoArchivo.*;
 
 /**
  *
@@ -20,8 +21,11 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        Articulo articulo = new Articulo();
+
         Interfaz ventana = new Interfaz();
         ventana.setVisible(true);
+        leerBDD();
 
         String resumen1 = "Complemento de software para el diseño de fundaciones.\n"
                 + "Autores\n"

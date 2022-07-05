@@ -135,10 +135,10 @@ public class Lista<T> {
 
         Nodo<T> aux = pFirst;
 
-        while (aux.getInfo() != node.getInfo()) {
+        while (aux.getInfo() != referencia) {
 
             aux = aux.getpNext();
-            if (aux.getInfo() == node.getInfo()) {
+            if (aux.getInfo() == referencia) {
 
                 found = true;
                 break;
@@ -356,23 +356,23 @@ public class Lista<T> {
         }
 
     }
-//
-//    public void imprimirValoresArticulo() {
-//        if (!esVacio()) {
-//            Nodo aux = pFirst;
-//
-//            for (int i = 0; i < size; i++) {
-//
-//                System.out.print(aux.getInfo() + " ==> ");
-//
-//                aux = aux.getpNext();
-//            }
-//        } else {
-//            System.out.print("La lista esta vacia");
-//        }
-//
-//    }
 
+    //
+    //    public void imprimirValoresArticulo() {
+    //        if (!esVacio()) {
+    //            Nodo aux = pFirst;
+    //
+    //            for (int i = 0; i < size; i++) {
+    //
+    //                System.out.print(aux.getInfo() + " ==> ");
+    //
+    //                aux = aux.getpNext();
+    //            }
+    //        } else {
+    //            System.out.print("La lista esta vacia");
+    //        }
+    //
+    //    }
     public String concatenarValores(Object lista) {
         Nodo aux = pFirst;
         String concatenado = "";

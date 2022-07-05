@@ -10,52 +10,45 @@ package proyecto2edd;
  * @param <T>
  */
 public class Nodo<T> {
+
     //Campos de la clase
     private T info;
-    
+
     private Nodo pNext;
-    
-//    public Nodo(Object arista){
-//    
-//        this.info = arista;
-//        
-//        this.pNext = null;
-//    }
 
     /**
      *
      * @return info de tipo T
      */
-    
-    public T getInfo(){
-    
+    public T getInfo() {
+
         return info;
     }
-    
+
     /**
      *
      * @param info
      */
-    public void setInfo(T info){
-    
+    public void setInfo(T info) {
+
         this.info = info;
     }
-    
+
     /**
      *
      * @return Apuntador al siguiente nodo de tipo Nodo
      */
-    public Nodo getpNext(){
-    
+    public Nodo getpNext() {
+
         return pNext;
     }
-    
+
     /**
      *
      * @param pNext
      */
-    public void setpNext(Nodo pNext){
-    
+    public void setpNext(Nodo pNext) {
+
         this.pNext = pNext;
     }
 }

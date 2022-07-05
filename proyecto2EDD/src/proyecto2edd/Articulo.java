@@ -86,6 +86,7 @@ public class Articulo<T> {
         }
     }
 
+
     public String getTitulo() {
         return titulo;
     }

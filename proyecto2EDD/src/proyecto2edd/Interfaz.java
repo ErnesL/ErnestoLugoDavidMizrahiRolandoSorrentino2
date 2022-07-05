@@ -5,6 +5,7 @@
  */
 package proyecto2edd;
 
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -17,13 +18,14 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import static proyecto2edd.ManejoArchivo.lecturaArchivo;
+import static proyecto2edd.ManejoArchivo.*;
 
 /**
  *
  * @author ernes
  */
 public class Interfaz extends javax.swing.JFrame {
-
+    
     public static Lista listaArticulos = new Lista();
     public static Articulo articulo = new Articulo();
 
@@ -49,7 +51,11 @@ public class Interfaz extends javax.swing.JFrame {
         BotonAgregar = new javax.swing.JButton();
         BotonBPAutor = new javax.swing.JButton();
         BotonBPPC = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,30 +68,43 @@ public class Interfaz extends javax.swing.JFrame {
                 BotonAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(BotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 180, 60));
+        jPanel1.add(BotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 130, -1));
 
         BotonBPAutor.setText("Autor");
-        jPanel1.add(BotonBPAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, -1, -1));
+        jPanel1.add(BotonBPAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, -1, -1));
 
         BotonBPPC.setText("Palabras claves");
-        jPanel1.add(BotonBPPC, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 280, -1, -1));
+        jPanel1.add(BotonBPPC, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
 
-        jButton1.setText("Leer BDD");
+        jLabel1.setText("Proyecto 2 / Ernesto Lugo - David Mizrahi");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 200, 30));
+
+        jLabel2.setText("Para agregar un articulo a la base de datos ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+
+        jLabel3.setText("Para ver los articulos almacenados puede hacerlo por:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        jButton1.setText("ver listaArticulos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+
+        jButton2.setText("ver size listaArticulos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void leerBDD() {
-
-    }
 
 
     private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
@@ -94,7 +113,7 @@ public class Interfaz extends javax.swing.JFrame {
         jfc.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
         jfc.addChoosableFileFilter(filter);
-
+        
         int returnValue = jfc.showOpenDialog(null);
 
         //Si el usuario agrega un txt.
@@ -104,122 +123,36 @@ public class Interfaz extends javax.swing.JFrame {
             //Empezamos a leer el archivo cargado
             StringBuilder sb = new StringBuilder();
             String txt = "";
-
+            
             try ( BufferedReader br = Files.newBufferedReader(Paths.get(auxpath))) {
 
                 //Lectura linea por linea
                 String line;
-
+                
                 while ((line = br.readLine()) != null) {
-
+                    
                     if (!line.isEmpty()) {
                         txt += line + "\n";
                     }
-
+                    
                 }
-
-                lecturaArchivo(txt, articulo);
-
-//                if (!"".equals(txt) && !txt.isEmpty()) {
-//                    String[] txt_split = txt.split("\n");
-//                    for (int i = 0; i < txt_split.length; i++) {
-//                        if (txt_split[i].equals("Autores") || txt_split[i].equals("autores")) {
-//                            System.out.println("Conseguimos autores\n");
-//                        }
-//
-//                        if (txt_split[i].equals("Resumen") || txt_split[i].equals("resumen")) {
-//                            System.out.println("Conseguimos resumen");
-//                        }
-//                        if (txt_split[i].equals("Palabras Claves:")) {
-//                            
-//                        }
-//                    }
-//
-//                }
+               
+                lecturaArchivo(txt, articulo, listaArticulos);
             } catch (IOException e) {
                 System.err.format("IOException: %s%n", e);
             }
-
+            
         }
 
     }//GEN-LAST:event_BotonAgregarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String articulos = "";
-        String path = "test\\basededatos.txt";
-        String line;
-        File file = new File(path);
-
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            } else {
-                FileReader fr = new FileReader(file);
-                BufferedReader br = new BufferedReader(fr);
-
-                while ((line = br.readLine()) != null) {
-                    if (!line.isEmpty()) {
-                        articulos += line + "\n";
-                    }
-                }
-                if (!"".equals(articulos)) {
-                    //Si el super string no esta vacio
-                    String[] articulos_split = articulos.split("\n");
-//                   
-                    for (int i = 0; i < articulos_split.length; i++) {
-
-                        Lista listaAutores = new Lista();
-                        Lista listaPalabras = new Lista();
-
-                        //Separa la informacion por "//". titulo -> 0; autores -> 1; cuerpo -> 2; palabrasclaves -> 3.
-                        String[] articulo_objeto = articulos_split[i].split("//");
-
-                        //Separa la informacion de los autores refiriendose al indice 1 y separando por ","
-                        String[] articulo_objeto_autores = articulo_objeto[1].split(",");
-
-                        //Separa la informacion de las palabras claves refiriendose al indice 3 y separando por ","
-                        String[] articulo_objeto_palabrasClave = articulo_objeto[3].split(",");
-
-                        //Agrega la informacion del array articulo_objeto_autores en una listaAutores.
-                        for (int j = 0; j < articulo_objeto_autores.length; j++) {
-                            listaAutores.agregarElemento(articulo_objeto_autores[j]);
-                        }
-
-                        //Agrega la informacion del array articulo_objeto_palabrasclave en una listaPalabras
-                        for (int k = 0; k < articulo_objeto_palabrasClave.length; k++) {
-                            listaPalabras.agregarElemento(articulo_objeto_palabrasClave[k]);
-                        }
-
-                        //Setters
-                        articulo.setTitulo(articulo_objeto[0]);
-                        articulo.setAutores(listaAutores);
-                        articulo.setCuerpo(articulo_objeto[2]);
-                        articulo.setPalabrasClave(listaPalabras);
-
-                        //Imprimir info
-                        String concatenadoautores = listaAutores.concatenarValores(listaAutores);
-                        String concatenadopalabras = listaPalabras.concatenarValores(listaPalabras);
-                        System.out.println("\n");
-                        System.out.println("Titulo: " + articulo.getTitulo());
-                        System.out.println("Autores: " + concatenadoautores);
-                        System.out.println("Cuerpo: " + articulo.getCuerpo());
-                        System.out.println("Palabras Clave: " + concatenadopalabras);
-                        System.out.println("\n");
-
-//                        articulo.mostrarInfo();
-                        //Agregar a listaArticulos
-                        listaArticulos.agregarElemento(articulo);
-                    }
-                }
-                br.close();
-                listaArticulos.imprimirValores();
-
-            }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error al tratar de leer la base de datos clientes.");
-        }
+        listaArticulos.imprimirValores();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,7 +168,7 @@ public class Interfaz extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-
+                    
                 }
             }
         } catch (ClassNotFoundException ex) {
@@ -266,6 +199,10 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton BotonBPAutor;
     private javax.swing.JButton BotonBPPC;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
