@@ -13,7 +13,7 @@ import proyecto2edd.Articulo.*;
  *
  * @author davidmizrahi
  */
-public class Main1 {
+public class Main {
 
     /**
      * @param args the command line arguments
