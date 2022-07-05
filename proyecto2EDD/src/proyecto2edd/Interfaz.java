@@ -25,7 +25,7 @@ import static proyecto2edd.ManejoArchivo.*;
  * @author ernes
  */
 public class Interfaz extends javax.swing.JFrame {
-    
+
     public static Lista listaArticulos = new Lista();
     public static Articulo articulo = new Articulo();
 
@@ -113,7 +113,7 @@ public class Interfaz extends javax.swing.JFrame {
         jfc.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TXT", "txt");
         jfc.addChoosableFileFilter(filter);
-        
+
         int returnValue = jfc.showOpenDialog(null);
 
         //Si el usuario agrega un txt.
@@ -123,25 +123,25 @@ public class Interfaz extends javax.swing.JFrame {
             //Empezamos a leer el archivo cargado
             StringBuilder sb = new StringBuilder();
             String txt = "";
-            
+
             try ( BufferedReader br = Files.newBufferedReader(Paths.get(auxpath))) {
 
                 //Lectura linea por linea
                 String line;
-                
+
                 while ((line = br.readLine()) != null) {
-                    
+
                     if (!line.isEmpty()) {
                         txt += line + "\n";
                     }
-                    
+
                 }
-               
+
                 lecturaArchivo(txt, articulo, listaArticulos);
             } catch (IOException e) {
                 System.err.format("IOException: %s%n", e);
             }
-            
+
         }
 
     }//GEN-LAST:event_BotonAgregarActionPerformed
@@ -168,7 +168,7 @@ public class Interfaz extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                    
+
                 }
             }
         } catch (ClassNotFoundException ex) {
